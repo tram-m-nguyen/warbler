@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<!-- List of followed user messages -->
+<div class="col-lg-6 col-md-8 col-sm-12">
+    <ul class="list-group" id="messages">
+      {% for msg in messages %}
+      <li class="list-group-item">
+        <!-- This link is not closed - causes our form button to not register -->
+
+        <!-- Style and Z index for form: -->
+        <a href="/messages/{{ msg.id }}" class="message-link"> 
+        <a href="/users/{{ msg.user.id }}">
+          <img src="{{ msg.user.image_url }}" alt="" class="timeline-image">
+        </a>
+        <div class="message-area">
+          <a href="/users/{{ msg.user.id }}">@{{ msg.user.username }}</a>
+          <span class="text-muted">{{ msg.timestamp.strftime('%d %B %Y') }}</span>
+          <p>{{ msg.text }}</p>
+          </a>
+        
+          <form action="/users/{{ msg.id }}/like" method="POST" id="token_form" style="position:relative; z-index: 10;">
+            {{ form.hidden_tag() }}
+            <button style="all:unset; cursor: pointer">
+              {% if msg in g.user.likes %}
+              <!-- will this run if in user.like -->
+              <i class="fas fa-star"></i>
+              {% else %}
+              <i class="far fa-star"></i>
+            </button>
+            {% endif %}
+          </form>
+
+        </div>
+      </li>
+
+      {% endfor %}
+
+
+
+
+
+ <!-- List of user liked messages
+ <div class="col-lg-6 col-md-8 col-sm-12">
+    <ul class="list-group" id="messages">
+        {% for msg in messages %}
+        <li class="list-group-item">
+            <a href="/messages/{{ msg.id }}" class="message-link">
+                <a href="/users/{{ msg.user.id }}">
+                    <img src="{{ msg.user.image_url }}" alt="" class="timeline-image">
+                </a>
+                <div class="message-area">
+                    <a href="/users/{{ msg.user.id }}">@{{ msg.user.username }}</a>
+                    <span class="text-muted">{{ msg.timestamp.strftime('%d %B %Y') }}</span>
+                    <p>{{ msg.text }}</p>
+            </a>
+
+            <form action="/users/{{ msg.id }}/like" method="POST" id="token_form" style="position:relative; z-index: 10;">
+                {{ form.hidden_tag() }}
+                <button style="all:unset; cursor: pointer">
+                  {% if msg in g.user.likes %}  -->
+                  <!-- will this run if in user.like -->
+                  <!-- <i class="fas fa-star"></i>
+                  {% else %}
+                  <i class="far fa-star"></i>
+                </button>
+                {% endif %}
+              </form>
+
+            {% endfor %}
+        </li>
+    </div>  -->
+
+
+{% endblock %}
+

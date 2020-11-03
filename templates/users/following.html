@@ -1,0 +1,10 @@
+{% extends 'users/detail.html' %}
+
+{% block user_details %}
+
+<!-- Displays cards for all followed users -->
+{% with element=followed_user, list=user.following %}
+    {% include 'users/_followers-following-cards.html' %}
+{% endwith %}
+
+{% endblock %}
